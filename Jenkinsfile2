@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                    sh 'docker build -t myapp-image .'
+                    sh 'docker tag myapp-image iot:myapp-image'
+                }
+            }
+        }
