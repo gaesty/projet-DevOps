@@ -22,16 +22,10 @@ pipeline {
       stage('Deployment App') {
             steps {
                 script {
-                    // Clean up unnecessary Docker assets
                     sh 'docker system prune --force'
-
-                    // Remove any existing container named "monapp" (if it exists)
                     sh 'docker rm -f myapp || true'
 
-                    // Run the newly built container
-                    sh 'docker run -d --name myapp --hostname myapp -p 8088:80 nginx'
-
-                    // Run a command in the container without requiring a TTY
+                    sh 'docker run -d --name myapp --hostname myapp -p 8088:80 myapp-image'
                     sh 'docker exec myapp ifconfig'
                 }
             }
