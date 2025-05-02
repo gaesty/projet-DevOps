@@ -32,7 +32,7 @@ pipeline {
                     sh 'docker run -d --name myapp --hostname myapp -p 8088:80 nginx'
 
                     // Run a command in the container without requiring a TTY
-                    sh 'docker exec monapp ifconfig'
+                    sh 'docker exec myapp ifconfig'
                 }
             }
         }
